@@ -1,0 +1,19 @@
+#!/bin/bash
+
+dnf -y update
+dnf -y install dnf-plugins-core
+
+cat >/etc/yum.repos.d/docker-ce.repo<<EOF
+[docker-ce-stable]
+name=Docker CE Stable
+baseurl=https://download.docker.com/linux/fedora/28/x86_64/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/fedora/gpg
+EOF
+
+dnf -y install docker-ce
+
+systemctl start docker && systemctl enable docker
+
+usermod -aG docker $(whoami)
