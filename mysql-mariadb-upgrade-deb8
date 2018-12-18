@@ -6,3 +6,7 @@ add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/m
 
 apt-get update
 apt-get install mariadb-server mariadb-client
+
+mysql_upgrade -uroot
+systemctl restart mariadb.service
+mysql -V
