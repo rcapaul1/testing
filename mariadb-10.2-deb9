@@ -1,0 +1,8 @@
+#!/bin/bash
+
+apt-get install software-properties-common dirmngr -y
+apt-key adv --recv-keys --keyserver keyring.debian.org 0x673A03E4C1DB921F
+
+add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.2/debian stretch main'
+
+apt-get update && apt-get install mariadb-server mariadb-client
