@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir /mnt/ext4_journal && mkdir /mnt/ext4_no_journal && mkdir /mnt/xfs
-mount /dev/sdb1 /mnt/ext_journal && mount /dev/sdb2 /mnt/ext4_no_journal && mount /dev/sdb3 /mnt/xfs
+mount /dev/sdb1 /mnt/ext4_journal && mount /dev/sdb2 /mnt/ext4_no_journal && mount /dev/sdb3 /mnt/xfs
 
 
 hdparm -tT /dev/sdb1 >/root/speedtest_read.txt && echo "ext4 mit Journal mit Cache" >>/root/speedtest_read.txt
