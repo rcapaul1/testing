@@ -1,5 +1,6 @@
 #!/bin/bash
 
+yum install mailx hdparm -y
 mkdir /mnt/ext4_journal && mkdir /mnt/ext4_no_journal && mkdir /mnt/xfs
 mount /dev/sdb1 /mnt/ext4_journal && mount /dev/sdb2 /mnt/ext4_no_journal && mount /dev/sdb3 /mnt/xfs
 
