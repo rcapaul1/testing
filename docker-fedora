@@ -12,7 +12,7 @@ gpgcheck=1
 gpgkey=https://download.docker.com/linux/fedora/gpg
 EOF
 
-dnf -y install docker-ce
+dnf -y install docker-ce docker-compose
 
 systemctl start docker && systemctl enable docker
 
