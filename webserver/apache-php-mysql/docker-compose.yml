@@ -13,13 +13,10 @@ services:
     mariadb:
         image: mariadb:10.2
         environment:
-            TZ: "Europe/Zurich"
-            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
-            MYSQL_ROOT_PASSWORD: "dimension2"
-            MYSQL_USER: 'roge'
-            MYSQL_PASSWORD: 'dimension2'
-            MYSQL_DATABASE: 'testdb'
-        volumes:
-          - d:/mysql/:/var/lib/mysql/
+            TZ: Europe/Zurich
+            MYSQL_ROOT_PASSWORD: dimension2
+            MYSQL_USER: root
+            MYSQL_PASSWORD: dimension2
+            MYSQL_DATABASE: testdb
         ports:
           - "3306:3306"
