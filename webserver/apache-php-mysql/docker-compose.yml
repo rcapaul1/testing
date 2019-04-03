@@ -1,12 +1,12 @@
 version: '3'
 services:
     php-apache:
-        image: php:7.2-fpm
+        image: php:7.2.2-apache
         container_name: php_web
         depends_on:
           - mariadb
         volumes:
-          - ./html/:/var/www/html/
+          - d:/html/:/var/www/html/
         ports:
             - 80:80
 
