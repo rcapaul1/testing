@@ -1,0 +1,21 @@
+version: '3'  
+
+services:
+
+  proxy:
+    image: jwilder/nginx-proxy:alpine
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
+    container_name: nextcloud-proxy
+    networks:
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - d:/nextcloud/proxy/conf.d:/etc/nginx/conf.d:rw
+      - d:/nextcloud/proxy/vhost.d:/etc/nginx/vhost.d:rw
+      - d:/nextcloud/proxy/html:/usr/share/nginx/html:rw
+      - d:/nextcloud/proxy/certs:/etc/nginx/certs:ro
+      - d:/nextcloud/etc/localtime:/etc/localtime:ro
+      - d:/nextcloud/var/run/docker.sock:/tmp/docker.sock:ro
+    restart: unless-stopped
