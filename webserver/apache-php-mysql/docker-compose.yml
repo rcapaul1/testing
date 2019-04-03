@@ -1,0 +1,23 @@
+version: '3'
+services:
+  php-apache:
+    image: php:7.2-fpm
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html
+    links:
+      - 'mariadb'
+
+image: mariadb:10.2
+volumes:
+  - mariadb:/var/lib/mysql
+environment:
+  TZ: "Europe/Zurich"
+  MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+  MYSQL_ROOT_PASSWORD: "dimension2"
+  MYSQL_USER: "roge"
+  MYSQL_DATABASE: "testdb"
+
+volumes:
+  mariadb:
