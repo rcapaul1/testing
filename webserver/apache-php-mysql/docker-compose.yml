@@ -2,10 +2,13 @@ version: '3'
 services:
     php-apache:
         image: php:7.2-fpm
+        container_name: php_web
+        depends_on:
+          - mariadb
+        volumes:
+          - ./html/:/var/www/html/
         ports:
             - 80:80
-        links:
-            - 'mariadb'
 
     mariadb:
         image: mariadb:10.2
@@ -16,3 +19,5 @@ services:
             MYSQL_USER: 'roge'
             MYSQL_PASSWORD: 'dimension2'
             MYSQL_DATABASE: 'testdb'
+        ports:
+          - "3306:3306"
