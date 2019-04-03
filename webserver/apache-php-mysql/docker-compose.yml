@@ -1,18 +1,14 @@
 version: '3'
 services:
     php-apache:
-        image: php:7.2.1-apache
+        image: php:7.2-fpm
         ports:
             - 80:80
-        volumes:
-            - ./DocumentRoot:/var/www/html:z
         links:
             - 'mariadb'
 
     mariadb:
         image: mariadb:10.1
-        volumes:
-            - mariadb:/var/lib/mysql
         environment:
             TZ: "Europe/Rome"
             MYSQL_ALLOW_EMPTY_PASSWORD: "no"
@@ -20,6 +16,3 @@ services:
             MYSQL_USER: 'roge'
             MYSQL_PASSWORD: 'dimension2'
             MYSQL_DATABASE: 'testdb'
-
-volumes:
-    mariadb:
