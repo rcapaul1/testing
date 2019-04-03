@@ -9,6 +9,7 @@ services:
             MYSQL_USER: root
             MYSQL_PASSWORD: dimension2
             MYSQL_DATABASE: testdb
+        restart: always
         ports:
           - "3306:3306"
   php-apache:
@@ -18,5 +19,6 @@ services:
             - mariadb
         volumes:
             - d:/html/:/var/www/html/
+        restart: always
         ports:
             - "80:80"
