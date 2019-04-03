@@ -20,6 +20,6 @@ services:
             MYSQL_PASSWORD: 'dimension2'
             MYSQL_DATABASE: 'testdb'
         volumes:
-          - d:/mysql:/var/lib/mysql/
+          - d:/mysql/:/var/lib/mysql/
         ports:
           - "3306:3306"
