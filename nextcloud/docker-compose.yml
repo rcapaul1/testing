@@ -10,11 +10,34 @@ services:
     ports:
       - 80:80
       - 443:443
-    volumes:
-      - d:/nextcloud/proxy/conf.d:/etc/nginx/conf.d:rw
-      - d:/nextcloud/proxy/vhost.d:/etc/nginx/vhost.d:rw
-      - d:/nextcloud/proxy/html:/usr/share/nginx/html:rw
-      - d:/nextcloud/proxy/certs:/etc/nginx/certs:ro
-      - d:/nextcloud/etc/localtime:/etc/localtime:ro
-      - d:/nextcloud/var/run/docker.sock:/tmp/docker.sock:ro
+    restart: unless-stopped
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nextcloud-letsencrypt
+    depends_on:
+      - proxy
+    restart: unless-stopped
+
+  db:
+    image: mariadb:10.2
+    container_name: nextcloud-mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    restart: unless-stopped
+
+  app:
+    image: nextcloud:latest
+    container_name: nextcloud-app
+    depends_on:
+      - letsencrypt
+      - proxy
+      - db
+    environment:
+      - VIRTUAL_HOST=nextcloud.rcapaul.ch
+      - LETSENCRYPT_HOST=nextcloud.rcapaul.ch
+      - LETSENCRYPT_EMAIL=roge.capaul@rcapaul.ch
     restart: unless-stopped
