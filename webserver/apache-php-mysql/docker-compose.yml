@@ -2,13 +2,9 @@ version: '3'
 
 services:
   mariadb:
-        image: mariadb:10.2
+        build: ../mariadb-10.2/.
         environment:
             TZ: Europe/Zurich
-            MYSQL_ROOT_PASSWORD: dimension2
-            MYSQL_USER: root
-            MYSQL_PASSWORD: dimension2
-            MYSQL_DATABASE: testdb
         restart: always
         ports:
           - "3306:3306"
