@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mariadb:
-        build: ../mariadb-10.2/.
+        build: ../../mariadb-10.2/.
         environment:
             TZ: Europe/Zurich
         restart: always
