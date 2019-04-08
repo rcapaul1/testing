@@ -18,7 +18,7 @@ services:
         depends_on:
             - mariadb
         volumes:
-            - ./:/html/:/var/www/html/
+            - .:/html/:/var/www/html/
         restart: always
         ports:
             - "80:80"
