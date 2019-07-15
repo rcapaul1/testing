@@ -1,21 +1,27 @@
-version: "3"
+version: "2"
 services:
-  your_app:
-    depends_on:
-      - your_app-letsencrypt
-  your_app-letsencrypt:
+  letsencrypt:
     image: linuxserver/letsencrypt
-    container_name: your_app-letsencrypt
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./config/letsencrypt:/config
+    container_name: letsencrypt
+    cap_add:
+      - NET_ADMIN
     environment:
-      - EMAIL=monitoring.hosttech@gmail.com
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
       - URL=rogecapaul.ch
-      - SUBDOMAINS=www,api
+      - SUBDOMAINS=www,
       - VALIDATION=http
-      - TZ=Europe/Zurich
-      - PUID=0
-      - PGID=0
+      - DNSPLUGIN=cloudflare #optional
+      - DUCKDNSTOKEN=token #optional
+      - EMAIL=monitoring.hosttech@gmail.com #optional
+      - DHLEVEL=2048 #optional
+      - ONLY_SUBDOMAINS=false #optional
+      - EXTRA_DOMAINS=extradomains #optional
+      - STAGING=false #optional
+    volumes:
+      - /path/to/appdata/config:/config
+    ports:
+      - 443:443
+      - 80:80 #optional
+    restart: unless-stopped
