@@ -1,11 +1,21 @@
-version: '3'
+version: "3"
 services:
-  nginx:
-    image: nginx:1.15-alpine
+  your_app:
+    depends_on:
+      - your_app-letsencrypt
+  your_app-letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: your_app-letsencrypt
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
-      - ./data/nginx:/etc/nginx/conf.d
-  certbot:
-    image: certbot/certbot
+      - ./config/letsencrypt:/config
+    environment:
+      - EMAIL=monitoring.hosttech@gmail.com
+      - URL=rogecapaul.ch
+      - SUBDOMAINS=www,api
+      - VALIDATION=http
+      - TZ=Europe/Zurich
+      - PUID=0
+      - PGID=0
