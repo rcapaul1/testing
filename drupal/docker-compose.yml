@@ -20,4 +20,7 @@ services:
     image: mariadb:10.3
     environment:
       MYSQL_ROOT_PASSWORD: dimension2
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: dimension2
     restart: always
