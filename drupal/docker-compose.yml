@@ -6,6 +6,11 @@ services:
     image: drupal:8-apache
     ports:
       - 8080:80
+    environment:
+      DRUPAL_DB_HOST: mariadb
+      DRUPAL_DB_USER: drupal
+      DRUPAL_DB_PASSWORD: dimension2
+      DRUPAL_DB_NAME: drupal
     volumes:
       - /var/www/html/modules
       - /var/www/html/profiles
