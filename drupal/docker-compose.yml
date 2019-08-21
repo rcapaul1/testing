@@ -1,31 +1,33 @@
-version: '3.1'
+version: '3'
 
 services:
-
   drupal:
-    image: drupal:8-apache
+    build: ./
+    image: geerlingguy/drupal:latest
+    container_name: drupal
+    environment:
+      DRUPAL_DATABASE_HOST: drupal-mysql
+      DRUPAL_DATABASE_PORT: 3306
+      DRUPAL_DATABASE_NAME: drupal
+      DRUPAL_DATABASE_USERNAME: drupal
+      DRUPAL_DATABASE_PASSWORD: drupal
+      # Generate a salt with: `php -r "echo bin2hex(random_bytes(25));"`
+      DRUPAL_HASH_SALT: db0de8a1556aa5348f87cfc950cd2c9641713d46e9412c8b05
     ports:
-      - 8080:80
-    environment:
-      DRUPAL_DB_HOST: mariadb
-      DRUPAL_DB_USER: drupal
-      DRUPAL_DB_PASSWORD: dimension2
-      DRUPAL_DB_NAME: drupal
-    volumes:
-      - /var/www/html/modules
-      - /var/www/html/profiles
-      - /var/www/html/themes
-      # this takes advantage of the feature in Docker that a new anonymous
-      # volume (which is what we're creating here) will be initialized with the
-      # existing content of the image at the same location
-      - /var/www/html/sites
+      - "80:80"
     restart: always
+    # Uncomment the volumes line and set to the local path of your Drupal
+    # installation, if you need to work with a local codebase.
+    # volumes:
+    #   - ~/Sites/drupal-container:/var/www/html:rw,delegated
 
-  mariadb:
+  mysql:
     image: mariadb:10.3
+    container_name: drupal-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: dimension2
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: drupal
       MYSQL_USER: drupal
-      MYSQL_PASSWORD: dimension2
-    restart: always
+      MYSQL_PASSWORD: drupal
+    ports:
+      - "3306:3306"
