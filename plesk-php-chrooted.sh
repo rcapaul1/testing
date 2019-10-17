@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./update_chroot.sh --add /opt/plesk/php/7.0/bin/php ; ./update_chroot.sh --add /opt/plesk/php/7.1/bin/php ; ./update_chroot.sh --add /opt/plesk/php/7.2/bin/php ; ./update_chroot.sh --add /opt/plesk/php/7.3/bin/php
+/root/update_chroot.sh --add /opt/plesk/php/7.0/bin/php ; /root/update_chroot.sh --add /opt/plesk/php/7.1/bin/php ; /root/update_chroot.sh --add /opt/plesk/php/7.2/bin/php ; /root/update_chroot.sh --add /opt/plesk/php/7.3/bin/php
 
 mkdir /var/www/vhosts/chroot/usr/share ; cp -a /usr/share/zoneinfo /var/www/vhosts/chroot/usr/share/zoneinfo
 
@@ -19,4 +19,4 @@ sed -i.bkp 's/;date.timezone =/date.timezone = Europe\/Zurich/' /var/www/vhosts/
 sed -i.bkp 's/;date.timezone =/date.timezone = Europe\/Zurich/' /var/www/vhosts/chroot/opt/plesk/php/7.2/etc/php.ini
 sed -i.bkp 's/;date.timezone =/date.timezone = Europe\/Zurich/' /var/www/vhosts/chroot/opt/plesk/php/7.3/etc/php.ini
 
-./update_chroot.sh --apply all
+/root/update_chroot.sh --apply all
