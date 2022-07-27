@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo snap install nextcloud
+sudo nextcloud.manual-install rcadmin dimension2
+sudo nextcloud.occ config:system:set trusted_domains 1 --value=testing.capaul.systems
+sudo nextcloud.enable-https lets-encrypt
