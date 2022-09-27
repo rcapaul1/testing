@@ -2,14 +2,14 @@ version: '3'
 
 services:
   mariadb:
-        build: ../../mariadb-10.2/.
+        build: ../../mariadb-10.4/.
         environment:
             TZ: Europe/Zurich
         restart: always
         ports:
           - "3306:3306"
   php-apache:
-        image: php:7.2-apache
+        image: php:8.0-apache
         container_name: php_web
         depends_on:
             - mariadb
