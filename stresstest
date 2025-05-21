@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apt update && apt install fio sysbench stress-ng stress -y
