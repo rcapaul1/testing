@@ -1,0 +1,2 @@
+#!/bin/bash
+yum install epel-release git wget calc iperf3 nodejs npm net-tools whois bind-utils yum-utils vim -y && yum update -y && yum remove firewalld -y && yum groupinstall "Development Tools" -y
