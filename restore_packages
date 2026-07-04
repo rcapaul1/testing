@@ -1,0 +1,28 @@
+#!/bin/bash
+
+INPUT_FILE="installed_packages.txt"
+
+if [ ! -f "$INPUT_FILE" ]; then
+    echo "Fehler: Die Datei '$INPUT_FILE' wurde nicht gefunden!"
+    exit 1
+fi
+
+echo "Starte die Wiederherstellung der Programme..."
+
+# Distribution erkennen und Pakete installieren
+if [ -f /etc/arch-release ]; then
+    echo "Installiere Pakete auf Arch Linux..."
+    # --needed überspringt bereits installierte Pakete
+    sudo pacman -S --needed - < "$INPUT_FILE"
+    
+elif [ -f /etc/debian_version ] || [ -f /etc/lsb-release ]; then
+    echo "Installiere Pakete auf Ubuntu/Debian..."
+    sudo apt update
+    xargs -a "$INPUT_FILE" sudo apt install -y
+    
+elif [ -f /etc/redhat-release ]; then
+    echo "Installiere Pakete auf RedHat/Fedora..."
+    sudo dnf install -y $(cat "$INPUT_FILE")
+fi
+
+echo "Wiederherstellung abgeschlossen!"
