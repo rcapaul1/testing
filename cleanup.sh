@@ -71,4 +71,4 @@ fi
 echo "=========================================="
 echo "Reinigung erfolgreich abgeschlossen!"
 echo "=========================================="
-sleep 3
+sleep 2
